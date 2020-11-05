@@ -1,13 +1,12 @@
-const { User } = require('../models/index')
-const bcrypt = require('bcrypt');
+const { Vuelo } = require('../models/index')
 
 
 const getAll = async(request, response) => {
-    console.log(request.user)
+    console.log(request.vuelo)
     try{
-        let users = await User.findAll();
+        let vuelos = await Vuelo.findAll();
         
-        if (users.length === 0){
+        if (vuelos.length === 0){
             return response.json({
                 ok: true,
                 message: {
@@ -18,7 +17,7 @@ const getAll = async(request, response) => {
 
         return response.json({
             ok: true,
-            users
+            vuelos
         });
 
     }catch(err){
@@ -34,18 +33,18 @@ const getAll = async(request, response) => {
 const getById = async(request, response) => {
     try{
         let id = request.params.id;
-        let user = await User.findByPk(id);
+        let vuelo = await Vuelo.findByPk(id);
 
-        if(!user){
+        if(!vuelo){
             return response.status(400).json({
                 ok: false,
-                message: 'Usuario no encontrado.'
+                message: 'Vuelo no encontrado.'
             });
         }
 
         return response.json({
             ok: true,
-            user
+            vuelo
         })
 
     }catch(err){
@@ -57,29 +56,29 @@ const getById = async(request, response) => {
     }
 }
 
-const createUser = async(request, response) => {
+const createVuelo = async(request, response) => {
     try{
-        let { nombre, apellido, email , password, confirmPasword, rol} = request.body;
+        let {origen , destino, operador, clase, sala, hora_fecha} = request.body;
 
-        let user = await User.create({
-            nombre,
-            apellido,
-            email,
-            password: bcrypt.hashSync(password,15),
-            confirmPasword: bcrypt.hashSync(password,15), 
-            rol
+        let vuelo = await Vuelo.create({
+            origen,
+            destino,
+            operador,
+            clase,
+            sala,
+            hora_fecha
         });
 
-        if(!user){
+        if(!vuelo){
             return response.status(200).json({
                 ok: false,
-                message: 'El usuario no ha sido creado'
+                message: 'El vuelo no ha sido creado'
             });
         }
 
         return response.json({
             ok:true,
-            user
+            vuelo
         });
 
     }catch(err){
@@ -91,28 +90,28 @@ const createUser = async(request, response) => {
     }
 }
 
-const updateUser = async(request, response) => {
+const updateVuelo = async(request, response) => {
 
     try{
         let id = request.params.id;
-        let { nombre, apellido, email , password, confirmPasword, rol} = request.body;
+        let { origen , destino, operador, clase, sala, hora_fecha} = request.body;
 
         let body = {
-            nombre , 
-            apellido, 
-            email, 
-            password: bcrypt.hashSync(password, 15 ),
-            confirmPasword: bcrypt.hashSync(password,15),
-            rol
+            origen,
+            destino,
+            operador,
+            clase,
+            sala,
+            hora_fecha
         }
 
-        let user = await User.update(body,{
+        let vuelo = await Vuelo.update(body,{
             where:{
                 id:id
             }
         });
 
-        if(!user){
+        if(!vuelo){
             return response.status(400).json({
                 ok: false,
                 message: 'El usuario no existe.'
@@ -120,7 +119,7 @@ const updateUser = async(request, response) => {
         }
         return response.json({
             ok:true,
-            user
+            vuelo
         });
 
     }catch(err){
@@ -132,26 +131,26 @@ const updateUser = async(request, response) => {
     }
 }
 
-const deleteUser = async(request, response) => {
+const deleteVuelo = async(request, response) => {
 
     try {
         let id = request.params.id;
-        let user = await User.destroy({
+        let vuelo = await User.destroy({
             where:{
                 id:id
             }
         });
 
-        if(!user){
+        if(!vuelo){
             return response.status(400).json({
                 ok: false,
-                message: 'El usuario no existe.'
+                message: 'El vuelo no existe.'
             });
         }
         
         return response.json({
             ok:true,
-            user
+            vuelo
         });
 
 
@@ -166,7 +165,8 @@ const deleteUser = async(request, response) => {
 module.exports = {
     getAll,
     getById,
-    createUser,
-    updateUser,
-    deleteUser
+    createVuelo,
+    updateVuelo,
+    deleteVuelo
+
 }

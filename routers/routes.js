@@ -1,16 +1,22 @@
 const express = require('express');
-const { login } = require('../controllers/login');
-const { verify } = require('../middleware/authentication');
-const { createUser } = require('../controllers/user')
+const { verify } = require('../middleware/authentication'); 
+const { createUser } = require('../controllers/user') //para registrar usuarios.
 
 const app = express();
 
+//inicio sesión
+app.use('/login', require('./login'));     //desde login.js
+
+//registrar usuario
+app.post('/register', createUser)
+
+//rutas para usuario.
 app.use('/user' , [verify] , require('./user'));
 
-app.post('/login', login);                 //desde el controlador     
-app.use('/login2', require('./login'));     //desde login.js
+//archivos logs
+app.use('/logs', require('./log'));         //desde log.js
 
-app.post('/register', createUser);
 
+app.use('/vuelos', [verify], require('./vuelo'));     //desde vuelos.
 
 module.exports = app;

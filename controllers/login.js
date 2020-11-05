@@ -37,7 +37,7 @@ const login = async(request, response) =>{
         return response.json({
             ok:true,
             token,
-             user
+            user
         });
 
     } catch (error) {
