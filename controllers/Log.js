@@ -60,7 +60,7 @@ const getById = async (request, response) => {
 
 const createLog = async (request, response) => {
     try {
-        let { id_usuario, name_usuario, status, metodo_inicio, hora_fecha, roll, intentos} = request.body;
+        let { id_usuario, name_usuario, status, metodo_inicio, hora_fecha, roll} = request.body;
 
         let log = await Log.create({
             id_usuario,
