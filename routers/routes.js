@@ -1,6 +1,7 @@
 const express = require('express');
 const { verify } = require('../middleware/authentication'); 
 const { createUser } = require('../controllers/user') //para registrar usuarios.
+const { emailRegistro } = require('../controllers/email')
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.use('/vuelos',require('./vuelo'));     //desde vuelos.
 app.use('/email', require('./email'));
 
 //enviar email para registro
-app.use('/email_registro', require('./email'))
+app.use('/email_registro', emailRegistro)
 
 //comprar
 app.use('/compra', [verify], require('./compra'));

@@ -13,15 +13,15 @@ const email = async (request, response) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: '171048@ids.upchiapas.edu.mx', // generated ethereal user
-                pass: 'chocobo1423', // generated ethereal password
+                user: 'alex_roque14@hotmail.com', // generated ethereal user
+                pass: 'escoba123', // generated ethereal password
             },
         });
 
         // send mail with defined transport object
 
         var info = await transporter.sendMail({
-            from: "171048@ids.upchiapas.edu.mx",
+            from: "alex_roque14@hotmail.com",
             to: email,
             subject: "AEROLINE. Inicio de sesión detectado.",
             html: `
