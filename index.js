@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const data = require('./models/index');
 const cors = require('cors');
 
@@ -17,7 +17,7 @@ app.use(require('./routers/routes'));
 //Servidor 
 app.listen(PORT, ()=>{
     console.log('Server listen in port: ' + PORT);
-
+    console.log('Server on');
     data.sequelize.authenticate().then(() => {
         console.log('Connected in data base');
     });
