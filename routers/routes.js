@@ -17,7 +17,7 @@ app.use('/user' , [verify] , require('./user'));
 app.use('/logs', require('./log'));         //desde log.js
 
 //rutas vuelos
-app.use('/vuelos', [verify], require('./vuelo'));     //desde vuelos.
+app.use('/vuelos',require('./vuelo'));     //desde vuelos.
 
 //enviar email
 app.use('/email', require('./email'));

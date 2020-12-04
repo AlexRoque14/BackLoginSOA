@@ -102,7 +102,7 @@ const updateUser = async(request, response) => {
             apellido, 
             email, 
             password: bcrypt.hashSync(password, 15 ),
-            confirmPassword: bcrypt.hashSync(password,15),
+            confirmPassword: bcrypt.hashSync(password, 15),
             rol
         }
 
