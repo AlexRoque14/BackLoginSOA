@@ -59,14 +59,14 @@ const getById = async(request, response) => {
 
 const createUser = async(request, response) => {
     try{
-        let { nombre, apellido, email , password, confirmPasword, roll} = request.body;
+        let { nombre, apellido, email , password, confirmPassword, roll} = request.body;
 
         let user = await User.create({
             nombre,
             apellido,
             email,
             password: bcrypt.hashSync(password,15),
-            confirmPasword: bcrypt.hashSync(password,15), 
+            confirmPassword: bcrypt.hashSync(password,15), 
             roll
         });
 
@@ -95,14 +95,14 @@ const updateUser = async(request, response) => {
 
     try{
         let id = request.params.id;
-        let { nombre, apellido, email , password, confirmPasword, rol} = request.body;
+        let { nombre, apellido, email , password, confirmPassword, rol} = request.body;
 
         let body = {
             nombre , 
             apellido, 
             email, 
             password: bcrypt.hashSync(password, 15 ),
-            confirmPasword: bcrypt.hashSync(password,15),
+            confirmPassword: bcrypt.hashSync(password,15),
             rol
         }
 
