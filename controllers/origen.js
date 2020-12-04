@@ -1,12 +1,12 @@
-const { Vuelo } = require('../models/index')
+const { origen } = require('../models/index')
+const bcrypt = require('bcrypt');
 
 
 const getAll = async(request, response) => {
-    console.log(request.vuelo)
     try{
-        let vuelos = await Vuelo.findAll();
+        let ori = await origen.findAll();
         
-        if (vuelos.length === 0){
+        if (ori.length === 0){
             return response.json({
                 ok: true,
                 message: {
@@ -17,7 +17,7 @@ const getAll = async(request, response) => {
 
         return response.json({
             ok: true,
-            vuelos
+            ori
         });
 
     }catch(err){
@@ -33,18 +33,18 @@ const getAll = async(request, response) => {
 const getById = async(request, response) => {
     try{
         let id = request.params.id;
-        let vuelo = await Vuelo.findByPk(id);
+        let ori = await origen.findByPk(id);
 
-        if(!vuelo){
+        if(!ori){
             return response.status(400).json({
                 ok: false,
-                message: 'Vuelo no encontrado.'
+                message: 'origen no encontrado.'
             });
         }
 
         return response.json({
             ok: true,
-            vuelo
+            ori
         })
 
     }catch(err){
@@ -56,31 +56,24 @@ const getById = async(request, response) => {
     }
 }
 
-const createVuelo = async(request, response) => {
+const createorigen = async(request, response) => {
     try{
-        let {origen , destino, id_origen, id_destino, operador, clase, sala, hora_fecha} = request.body;
+        let {nombre_origen} = request.body;
 
-        let vuelo = await Vuelo.create({
-            origen,
-            destino,
-            id_origen,
-            id_destino,
-            operador,
-            clase,
-            sala,
-            hora_fecha
+        let ori = await origen.create({
+            nombre_origen
         });
 
-        if(!vuelo){
+        if(!ori){
             return response.status(200).json({
                 ok: false,
-                message: 'El vuelo no ha sido creado'
+                message: 'El origen no ha sido creado'
             });
         }
 
         return response.json({
             ok:true,
-            vuelo
+            ori
         });
 
     }catch(err){
@@ -92,38 +85,31 @@ const createVuelo = async(request, response) => {
     }
 }
 
-const updateVuelo = async(request, response) => {
+const updateorigen = async(request, response) => {
 
     try{
         let id = request.params.id;
-        let { origen , destino, id_origen, id_destino, operador, clase, sala, hora_fecha} = request.body;
+        let { nombre_origen} = request.body;
 
         let body = {
-            origen,
-            destino,
-            id_origen,
-            id_destino,
-            operador,
-            clase,
-            sala,
-            hora_fecha
+            nombre_origen
         }
 
-        let vuelo = await Vuelo.update(body,{
+        let ori = await origen.update(body,{
             where:{
                 id:id
             }
         });
 
-        if(!vuelo){
+        if(!ori){
             return response.status(400).json({
                 ok: false,
-                message: 'El usuario no existe.'
+                message: 'La origen no existe.'
             });
         }
         return response.json({
             ok:true,
-            vuelo
+            ori
         });
 
     }catch(err){
@@ -135,26 +121,26 @@ const updateVuelo = async(request, response) => {
     }
 }
 
-const deleteVuelo = async(request, response) => {
+const deleteorigen = async(request, response) => {
 
     try {
         let id = request.params.id;
-        let vuelo = await Vuelo.destroy({
+        let ori = await origen.destroy({
             where:{
                 id:id
             }
         });
 
-        if(!vuelo){
+        if(!ori){
             return response.status(400).json({
                 ok: false,
-                message: 'El vuelo no existe.'
+                message: 'La origen no existe.'
             });
         }
         
         return response.json({
             ok:true,
-            vuelo
+            ori
         });
 
 
@@ -169,8 +155,7 @@ const deleteVuelo = async(request, response) => {
 module.exports = {
     getAll,
     getById,
-    createVuelo,
-    updateVuelo,
-    deleteVuelo
-
+    createorigen,
+    updateorigen,
+    deleteorigen
 }

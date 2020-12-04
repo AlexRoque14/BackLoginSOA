@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     name_usuario: DataTypes.STRING,
     metodo_inicio: DataTypes.STRING,
     status: DataTypes.STRING,
-    hora_fecha: DataTypes.STRING
+    hora_fecha: DataTypes.STRING,
+    actividad: DataTypes.STRING,
+    roll: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Log',

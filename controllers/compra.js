@@ -1,12 +1,12 @@
-const { Vuelo } = require('../models/index')
+const { compra } = require('../models/index')
+const bcrypt = require('bcrypt');
 
 
 const getAll = async(request, response) => {
-    console.log(request.vuelo)
     try{
-        let vuelos = await Vuelo.findAll();
+        let compra = await compra.findAll();
         
-        if (vuelos.length === 0){
+        if (compra.length === 0){
             return response.json({
                 ok: true,
                 message: {
@@ -17,7 +17,7 @@ const getAll = async(request, response) => {
 
         return response.json({
             ok: true,
-            vuelos
+            compra
         });
 
     }catch(err){
@@ -33,18 +33,18 @@ const getAll = async(request, response) => {
 const getById = async(request, response) => {
     try{
         let id = request.params.id;
-        let vuelo = await Vuelo.findByPk(id);
+        let compra = await compra.findByPk(id);
 
-        if(!vuelo){
+        if(!compra){
             return response.status(400).json({
                 ok: false,
-                message: 'Vuelo no encontrado.'
+                message: 'Usuario no encontrado.'
             });
         }
 
         return response.json({
             ok: true,
-            vuelo
+            compra
         })
 
     }catch(err){
@@ -56,31 +56,25 @@ const getById = async(request, response) => {
     }
 }
 
-const createVuelo = async(request, response) => {
+const createcompra = async(request, response) => {
     try{
-        let {origen , destino, id_origen, id_destino, operador, clase, sala, hora_fecha} = request.body;
+        let { id_usuario, id_vuelo} = request.body;
 
-        let vuelo = await Vuelo.create({
-            origen,
-            destino,
-            id_origen,
-            id_destino,
-            operador,
-            clase,
-            sala,
-            hora_fecha
+        let compra = await compra.create({
+            id_usuario,
+            id_vuelo
         });
 
-        if(!vuelo){
+        if(!compra){
             return response.status(200).json({
                 ok: false,
-                message: 'El vuelo no ha sido creado'
+                message: 'El usuario no ha sido creado'
             });
         }
 
         return response.json({
             ok:true,
-            vuelo
+            compra
         });
 
     }catch(err){
@@ -92,38 +86,32 @@ const createVuelo = async(request, response) => {
     }
 }
 
-const updateVuelo = async(request, response) => {
+const updatecompra = async(request, response) => {
 
     try{
         let id = request.params.id;
-        let { origen , destino, id_origen, id_destino, operador, clase, sala, hora_fecha} = request.body;
+        let { id_usuario, id_vuelo} = request.body;
 
         let body = {
-            origen,
-            destino,
-            id_origen,
-            id_destino,
-            operador,
-            clase,
-            sala,
-            hora_fecha
+            id_usuario,
+            id_vuelo
         }
 
-        let vuelo = await Vuelo.update(body,{
+        let compra = await compra.update(body,{
             where:{
                 id:id
             }
         });
 
-        if(!vuelo){
+        if(!compra){
             return response.status(400).json({
                 ok: false,
-                message: 'El usuario no existe.'
+                message: 'La compra no existe.'
             });
         }
         return response.json({
             ok:true,
-            vuelo
+            compra
         });
 
     }catch(err){
@@ -135,26 +123,26 @@ const updateVuelo = async(request, response) => {
     }
 }
 
-const deleteVuelo = async(request, response) => {
+const deletecompra = async(request, response) => {
 
     try {
         let id = request.params.id;
-        let vuelo = await Vuelo.destroy({
+        let compra = await compra.destroy({
             where:{
                 id:id
             }
         });
 
-        if(!vuelo){
+        if(!compra){
             return response.status(400).json({
                 ok: false,
-                message: 'El vuelo no existe.'
+                message: 'La compra no existe.'
             });
         }
         
         return response.json({
             ok:true,
-            vuelo
+            compra
         });
 
 
@@ -169,8 +157,7 @@ const deleteVuelo = async(request, response) => {
 module.exports = {
     getAll,
     getById,
-    createVuelo,
-    updateVuelo,
-    deleteVuelo
-
+    createcompra,
+    updatecompra,
+    deletecompra
 }

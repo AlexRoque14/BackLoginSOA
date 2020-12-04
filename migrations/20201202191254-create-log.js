@@ -22,6 +22,13 @@ module.exports = {
       },
       hora_fecha: {
         type: Sequelize.STRING
+      },
+      actividad: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      roll: {
+        type: Sequelize.STRING
       }
     });
   },

@@ -1,12 +1,12 @@
-const { Vuelo } = require('../models/index')
+const { destino } = require('../models/index')
+const bcrypt = require('bcrypt');
 
 
 const getAll = async(request, response) => {
-    console.log(request.vuelo)
     try{
-        let vuelos = await Vuelo.findAll();
+        let destin = await destino.findAll();
         
-        if (vuelos.length === 0){
+        if (destin.length === 0){
             return response.json({
                 ok: true,
                 message: {
@@ -17,7 +17,7 @@ const getAll = async(request, response) => {
 
         return response.json({
             ok: true,
-            vuelos
+            destin
         });
 
     }catch(err){
@@ -33,18 +33,18 @@ const getAll = async(request, response) => {
 const getById = async(request, response) => {
     try{
         let id = request.params.id;
-        let vuelo = await Vuelo.findByPk(id);
+        let destin = await destino.findByPk(id);
 
-        if(!vuelo){
+        if(!destin){
             return response.status(400).json({
                 ok: false,
-                message: 'Vuelo no encontrado.'
+                message: 'destino no encontrado.'
             });
         }
 
         return response.json({
             ok: true,
-            vuelo
+            destin
         })
 
     }catch(err){
@@ -56,31 +56,24 @@ const getById = async(request, response) => {
     }
 }
 
-const createVuelo = async(request, response) => {
+const createdestino = async(request, response) => {
     try{
-        let {origen , destino, id_origen, id_destino, operador, clase, sala, hora_fecha} = request.body;
+        let {nombre_destino} = request.body;
 
-        let vuelo = await Vuelo.create({
-            origen,
-            destino,
-            id_origen,
-            id_destino,
-            operador,
-            clase,
-            sala,
-            hora_fecha
+        let destin = await destino.create({
+            nombre_destino
         });
 
-        if(!vuelo){
+        if(!destin){
             return response.status(200).json({
                 ok: false,
-                message: 'El vuelo no ha sido creado'
+                message: 'El destino no ha sido creado'
             });
         }
 
         return response.json({
             ok:true,
-            vuelo
+            destin
         });
 
     }catch(err){
@@ -92,38 +85,31 @@ const createVuelo = async(request, response) => {
     }
 }
 
-const updateVuelo = async(request, response) => {
+const updatedestino = async(request, response) => {
 
     try{
         let id = request.params.id;
-        let { origen , destino, id_origen, id_destino, operador, clase, sala, hora_fecha} = request.body;
+        let { nombre_destino} = request.body;
 
         let body = {
-            origen,
-            destino,
-            id_origen,
-            id_destino,
-            operador,
-            clase,
-            sala,
-            hora_fecha
+            nombre_destino
         }
 
-        let vuelo = await Vuelo.update(body,{
+        let destin = await destino.update(body,{
             where:{
                 id:id
             }
         });
 
-        if(!vuelo){
+        if(!destin){
             return response.status(400).json({
                 ok: false,
-                message: 'El usuario no existe.'
+                message: 'La destino no existe.'
             });
         }
         return response.json({
             ok:true,
-            vuelo
+            destin
         });
 
     }catch(err){
@@ -135,26 +121,26 @@ const updateVuelo = async(request, response) => {
     }
 }
 
-const deleteVuelo = async(request, response) => {
+const deletedestino = async(request, response) => {
 
     try {
         let id = request.params.id;
-        let vuelo = await Vuelo.destroy({
+        let destin = await destino.destroy({
             where:{
                 id:id
             }
         });
 
-        if(!vuelo){
+        if(!destin){
             return response.status(400).json({
                 ok: false,
-                message: 'El vuelo no existe.'
+                message: 'La destino no existe.'
             });
         }
         
         return response.json({
             ok:true,
-            vuelo
+            destin
         });
 
 
@@ -169,8 +155,7 @@ const deleteVuelo = async(request, response) => {
 module.exports = {
     getAll,
     getById,
-    createVuelo,
-    updateVuelo,
-    deleteVuelo
-
+    createdestino,
+    updatedestino,
+    deletedestino
 }

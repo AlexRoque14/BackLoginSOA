@@ -28,9 +28,8 @@ const email = async (request, response) => {
         <h1>Hola ${email} !</h1>
         <p>\nHemos detectado un intento de sesión inusual en tu cuenta.
         \nSi haz realizado esta actividad te  
-        te recomendamos cambiar tu contraseña (<a href:"http://localhost:4200/password>Cambiar contraseña</h1>)
-         o comunicate con un administrador.\n</a>
-        
+        te recomendamos cambiar tu contraseña (<a href:"http://localhost:4200/password>Cambiar contraseña</a>)
+         o comunicate con un administrador.\n</p>
 
         <p>
         Estás recibiendo este correo electrónico en la cuenta ${email} porque estás 
