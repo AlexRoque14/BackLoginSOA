@@ -19,8 +19,11 @@ app.use('/logs', require('./log'));         //desde log.js
 //rutas vuelos
 app.use('/vuelos',require('./vuelo'));     //desde vuelos.
 
-//enviar email
+//enviar email inicio de sesion
 app.use('/email', require('./email'));
+
+//enviar email para registro
+app.use('/email_registro', require('./email'))
 
 //comprar
 app.use('/compra', [verify], require('./compra'));
