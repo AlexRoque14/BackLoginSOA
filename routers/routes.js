@@ -34,7 +34,7 @@ app.use('/destino', require('./destino'));
 //test
 app.get('/test_deploy', (request , response)=>{
     response.json({
-        ok, 
+        ok: true, 
         message: "Deploy"})
 })
 
