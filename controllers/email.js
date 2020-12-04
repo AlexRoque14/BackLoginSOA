@@ -13,8 +13,8 @@ const email = async (request, response) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'alex_roque14@hotmail.com', // generated ethereal user
-                pass: 'escoba123', // generated ethereal password
+                user: '171048@ids.upchiapas.edu.mx', // generated ethereal user
+                pass: 'chocobo1423', // generated ethereal password
             },
         });
 
@@ -77,8 +77,8 @@ const emailRegistro = async (request, response) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'alex_roque14@hotmail.com', // generated ethereal user
-                pass: 'escoba123', // generated ethereal password
+                user: '171048@ids.upchiapas.edu.mx', // generated ethereal user
+                pass: 'chocobo1423', // generated ethereal password
             },
         });
 
