@@ -92,7 +92,7 @@ const emailRegistro = async (request, response) => {
         <h1>Hola ${email} !</h1>
         <p>\nBienvenido a nuestra comunidad.\n 
         Ahora ya estás listo para viajar a dónde quieras. \n
-        Vísita nuestra pagina (<a href:"http://localhost:4200/home">Aeroline) y adquiere
+        Vísita nuestra pagina (<a href:"http://localhost:4200/home">Aeroline</a>) y adquiere
         todos tus boletos.
         </p>
 
@@ -117,6 +117,61 @@ const emailRegistro = async (request, response) => {
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
+        return response.json({
+            ok: true
+        });
+
+
+    } catch (error) {
+        return response.status(500).json({
+            ok: false,
+            error
+        });
+    }
+}
+
+const confirm_email = async (request, response) => {
+    try {
+
+        let { email , destino , origen } = request.body;
+        console.log(email)
+
+        let testAccount = await nodemailer.createTestAccount();
+
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: '171048@ids.upchiapas.edu.mx', // generated ethereal user
+                pass: 'chocobo1423', // generated ethereal password
+            },
+        });
+
+        var info = await transporter.sendMail({
+            from: "alex_roque14@hotmail.com",
+            to: email,
+            subject: "AEROLINE. Confirmación de compra.",
+            html: `
+        <h1>Hola ${email} !</h1>
+        <p>\nEstas a un paso de realizar tu compra.
+        \n.Vuela de ${origen} a ${destino}, solo haz click en el siguiente link y confirma tu compra.\n</p>
+
+        <p>
+        Estás recibiendo este correo electrónico en la cuenta ${email} porque estás 
+        suscrito a AEROLINE. </p>
+        <p>Reenviar esta invitación podría permitir a cualquier destinatario enviar una respuesta 
+        y realizar modificaciones a la cuenta. Areoline no se hace responsable en caso del reenvio de este email.
+        </p>
+        <p>
+        Para dejar de recibir estos correos electrónico comunicate con un administrador para 
+        cambiar la configuración de notificaciones. </p>
+
+        <p>No responder a este correo electronico.</p>
+    `
+        })
+
+        console.log("Message sent: %s", info.messageId);
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
         return response.json({
             ok: true
         });
