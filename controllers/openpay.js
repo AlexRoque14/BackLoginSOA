@@ -14,7 +14,7 @@ const open = async (request , response) => {
             'method' : 'card',
             'amount' : amount,
             'description' : 'Pago del vuelo.',
-            'order_id' : fecha.getDate() ,
+            'order_id' : fecha.getHours()+fecha.getMinutes()+fecha.getSeconds(),
             'customer' : {
                  'name' : name,
                  'last_name' : last_name,
