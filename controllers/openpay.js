@@ -6,31 +6,33 @@ openpay.setProductionReady(false);
 const open = async (request , response) => {
     try {
 
-        let{card_number , name , ey , em , cvv2 , amount} = request.body;
+        let{card_number , name , last_name, email, ey , em , cvv2 , amount} = request.body;
         
-        var newCharge = {
-            "method": "card",
-            "card": {
-              "card_number": card_number,
-              "holder_name": name,
-              "expiration_year": ey,
-              "expiration_month": em,
-              "cvv2": cvv2,
+        var chargeRequest = {
+            'method' : 'card',
+            'amount' : amount,
+            'description' : 'Cargo inicial a mi cuenta',
+            'order_id' : 'oid-00051',
+            'customer' : {
+                 'name' : name,
+                 'last_name' : last_name,
+                 'phone_number' : '4423456723',
+                 'email' : email
             },
-            "amount" : amount,
-            "description" : "Compra de boleto de avión.",
-            "order_id" : "oid-00721"
-          };
+           'send_email' : true,
+           'confirm' : false,
+           'redirect_url' : 'http://www.openpay.mx/index.html'
+         }
 
-          openpay.charges.create(newCharge, function (error, body){
-            if(body){
-                console.log(body)
+         openpay.charges.create(chargeRequest, function(error, charge) {
+            if(charge){
+                console.log(charge)
             }else{
                 console.log(error)
             }
           });
 
-          
+ 
         return response.json({
             ok: true
         });
