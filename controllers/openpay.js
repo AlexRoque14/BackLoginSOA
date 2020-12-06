@@ -1,6 +1,7 @@
 
 var Openpay = require('openpay');
-var openpay = new Openpay('me15vds5kqqjohdwmnyo', 'sk_a9dc548021124ee8af2eaeda3c4a68c6', [ isProduction ]);
+var openpay = new Openpay('me15vds5kqqjohdwmnyo', 'sk_a9dc548021124ee8af2eaeda3c4a68c6');
+openpay.setProductionReady(false);
 
 const open = async (request , response) => {
     try {
