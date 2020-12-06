@@ -7,12 +7,14 @@ const open = async (request , response) => {
     try {
 
         let{card_number , name , last_name, email, ey , em , cvv2 , amount} = request.body;
+
+        const fecha = new Date();
         
         var chargeRequest = {
             'method' : 'card',
             'amount' : amount,
-            'description' : 'Cargo inicial a mi cuenta',
-            'order_id' : 'oid-00051',
+            'description' : 'Pago del vuelo.',
+            'order_id' : fecha.getDate() ,
             'customer' : {
                  'name' : name,
                  'last_name' : last_name,
