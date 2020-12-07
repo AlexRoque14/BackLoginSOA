@@ -34,7 +34,7 @@ const getById = async(request, response) => {
         let id = request.params.id;
         let comp = await compra.findByPk(id);
 
-        if(!com){
+        if(!comp){
             return response.status(400).json({
                 ok: false,
                 message: 'Compra no encontrado.'
@@ -42,7 +42,7 @@ const getById = async(request, response) => {
         }
 
         return response.json({
-            com
+            comp
         })
 
     }catch(err){
