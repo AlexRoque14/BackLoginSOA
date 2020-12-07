@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 
 const getAll = async(request, response) => {
     try{
-        let compra = await compra.findAll();
+        let com = await compra.findAll();
         
-        if (compra.length === 0){
+        if (com.length === 0){
             return response.json({
                 ok: true,
                 message: {
@@ -17,7 +17,7 @@ const getAll = async(request, response) => {
 
         return response.json({
             ok: true,
-            compra
+            com
         });
 
     }catch(err){
@@ -33,9 +33,9 @@ const getAll = async(request, response) => {
 const getById = async(request, response) => {
     try{
         let id = request.params.id;
-        let compra = await compra.findByPk(id);
+        let comp = await compra.findByPk(id);
 
-        if(!compra){
+        if(!com){
             return response.status(400).json({
                 ok: false,
                 message: 'Compra no encontrado.'
@@ -44,7 +44,7 @@ const getById = async(request, response) => {
 
         return response.json({
             ok: true,
-            compra
+            com
         })
 
     }catch(err){
@@ -60,13 +60,13 @@ const createcompra = async(request, response) => {
     try{
         let { id_usuario, id_vuelo, status} = request.body;
 
-        let compra = await compra.create({
+        let com = await compra.create({
             id_usuario,
             id_vuelo,
             status
         });
 
-        if(!compra){
+        if(!com){
             return response.status(200).json({
                 ok: false,
                 message: 'La compra no ha sido creado'
@@ -75,7 +75,7 @@ const createcompra = async(request, response) => {
 
         return response.json({
             ok:true,
-            compra
+            com
         });
 
     }catch(err){
@@ -97,13 +97,13 @@ const updatecompra = async(request, response) => {
             status
         }
 
-        let compra = await compra.update(body,{
+        let com = await compra.update(body,{
             where:{
                 id_usuario:id
             }
         });
 
-        if(!compra){
+        if(!com){
             return response.status(400).json({
                 ok: false,
                 message: 'La compra no existe.'
@@ -111,7 +111,7 @@ const updatecompra = async(request, response) => {
         }
         return response.json({
             ok:true,
-            compra
+            com
         });
 
     }catch(err){
@@ -127,13 +127,13 @@ const deletecompra = async(request, response) => {
 
     try {
         let id = request.params.id;
-        let compra = await compra.destroy({
+        let com = await compra.destroy({
             where:{
                 id:id
             }
         });
 
-        if(!compra){
+        if(!com){
             return response.status(400).json({
                 ok: false,
                 message: 'La compra no existe.'
@@ -142,7 +142,7 @@ const deletecompra = async(request, response) => {
         
         return response.json({
             ok:true,
-            compra
+            com
         });
 
 
