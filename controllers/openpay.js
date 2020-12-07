@@ -6,8 +6,10 @@ openpay.setProductionReady(false);
 const open = async (request , response) => {
     try {
 
-        let{ name , last_name, email, amount} = request.body;
+        let{ name , last_name, email, amount , destino , origen } = request.body;
         
+        //Destino , origen 
+
         const fecha = new Date();
         
         var chargeRequest = {

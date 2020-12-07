@@ -34,7 +34,22 @@ module.exports = {
       },
       hora_fecha: {
         type: Sequelize.STRING
-      }
+      },
+      precio_basica: {
+        type: Sequelize.STRING
+      },
+      precio_clasica: {
+        type: Sequelize.STRING
+      },
+      precio_confort: {
+        type: Sequelize.STRING
+      },
+      precio_plus: {
+        type: Sequelize.STRING
+      },
+      precio_premiere: {
+        type: Sequelize.STRING
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {

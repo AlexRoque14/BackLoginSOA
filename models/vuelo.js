@@ -21,7 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     id_origen: DataTypes.STRING,
     clase: DataTypes.STRING,
     sala: DataTypes.STRING,
-    hora_fecha: DataTypes.STRING
+    hora_fecha: DataTypes.STRING,
+    precio_basica: DataTypes.STRING,
+    precio_clasica: DataTypes.STRING,
+    precio_confort: DataTypes.STRING,
+    precio_plus: DataTypes.STRING,
+    precio_premiere: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Vuelo',
