@@ -38,7 +38,7 @@ const getById = async(request, response) => {
         if(!compra){
             return response.status(400).json({
                 ok: false,
-                message: 'Usuario no encontrado.'
+                message: 'Compra no encontrado.'
             });
         }
 
@@ -58,17 +58,18 @@ const getById = async(request, response) => {
 
 const createcompra = async(request, response) => {
     try{
-        let { id_usuario, id_vuelo} = request.body;
+        let { id_usuario, id_vuelo, status} = request.body;
 
         let compra = await compra.create({
             id_usuario,
-            id_vuelo
+            id_vuelo,
+            status
         });
 
         if(!compra){
             return response.status(200).json({
                 ok: false,
-                message: 'El usuario no ha sido creado'
+                message: 'La compra no ha sido creado'
             });
         }
 
@@ -89,17 +90,16 @@ const createcompra = async(request, response) => {
 const updatecompra = async(request, response) => {
 
     try{
-        let id = request.params.id;
-        let { id_usuario, id_vuelo} = request.body;
+        let id = request.params.id_usuario;
+        let {status} = request.body;
 
         let body = {
-            id_usuario,
-            id_vuelo
+            status
         }
 
         let compra = await compra.update(body,{
             where:{
-                id:id
+                id_usuario:id
             }
         });
 

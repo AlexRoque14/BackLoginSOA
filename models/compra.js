@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   compra.init({
     id_usuario: DataTypes.STRING,
-    id_vuelo: DataTypes.STRING
+    id_vuelo: DataTypes.STRING,
+    status: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'compra',

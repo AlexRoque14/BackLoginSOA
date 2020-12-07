@@ -13,6 +13,9 @@ module.exports = {
       },
       id_vuelo: {
         type: Sequelize.STRING
+      },
+      status: {
+        type: Sequelize.STRING
       }
     });
   },

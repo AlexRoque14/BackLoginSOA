@@ -8,7 +8,6 @@ const open = async (request , response) => {
 
         let{ name , last_name, email, amount , destino , origen } = request.body;
         
-        //Destino , origen 
 
         const fecha = new Date();
         

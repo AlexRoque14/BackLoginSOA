@@ -33,6 +33,7 @@ app.use('/email_registro', emailRegistro)
 //comprar
 app.use('/compra', [verify], require('./compra'));
 
+
 //origen
 app.use('/origen', require('./origen'));
 
