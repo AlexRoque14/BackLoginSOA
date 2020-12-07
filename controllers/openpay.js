@@ -24,7 +24,7 @@ const open = async (request , response) => {
             },
            'send_email' : true,
            'confirm' : false,
-           'redirect_url' : 'https://authsoa.web.app/comprar-vuelo'
+           'redirect_url' : 'https://authsoa.web.app/redirect'
          }
 
          openpay.charges.create(chargeRequest, function(error, charge) {
