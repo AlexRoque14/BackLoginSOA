@@ -39,8 +39,12 @@ app.use('/origen', require('./origen'));
 //destino
 app.use('/destino', require('./destino'));
 
+
+
 //paypal esto es nuevo 05/12/2020
 app.use('/pagar', [verify] , open)
+
+
 
 //test
 app.get('/test_deploy', (request , response)=>{
