@@ -16,7 +16,6 @@ const getAll = async(request, response) => {
         }
 
         return response.json({
-            ok: true,
             com
         });
 
@@ -43,7 +42,6 @@ const getById = async(request, response) => {
         }
 
         return response.json({
-            ok: true,
             com
         })
 
