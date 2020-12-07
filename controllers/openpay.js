@@ -15,7 +15,7 @@ const open = async (request , response) => {
         var chargeRequest = {
             'method' : 'card',
             'amount' : amount,
-            'description' : 'Pago del vuelo.',
+            'description' : 'Pago de vuelo de ' +origen+' a ' + destino +'.',
             'order_id' : fecha.getHours()+fecha.getMinutes()+fecha.getSeconds(),
             'customer' : {
                  'name' : name,
